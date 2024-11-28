@@ -64,12 +64,18 @@ def filterLikedSongsByMood(mood):
 
     try:
         for song in likedSongs:
-            # Get audio features for each song
-            audio_features = spotifyClient.audio_features(song["id"])[0]
-            if audio_features:
-                detectedMood = detectMood(audio_features)
+            # Skip songs without valid IDs
+            if not song["id"]:
+                continue
+
+            # Get audio features for the song
+            audio_features = spotifyClient.audio_features(song["id"])
+            if audio_features and audio_features[0]:  # Ensure the response is not empty
+                detectedMood = detectMood(audio_features[0])
                 if detectedMood == mood:
                     filteredSongs.append(song)
+            else:
+                print(f"Skipping song with invalid audio features: {song['name']}")
     except Exception as e:
         messagebox.showerror("Error", f"Failed to analyze song mood: {e}")
 
