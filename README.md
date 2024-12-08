@@ -1,4 +1,7 @@
-Final project for CIS 492 using spotify API
+Final project for CIS 492 using spotify API 
+
+need to install pip spotipy
+The main branch contains our final code and the other branch was one that we had trouble with which had our original algorithm.
 
 For the code to function you will need to create a class called .env and in that file copy and paste the following:
 
